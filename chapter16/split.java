@@ -2,34 +2,26 @@
  * the negative values appear before all of the non-negatives.
  */
 public void split() {
-    if(front == null)
-        return;
-        
     ListNode current = front;
-    ListNode neg = null;
-    ListNode pos = null;
-    ListNode negLast = null;
     
-    while(current != null) {
-        ListNode next = current.next;
-        
-        if(current.data < 0) {
-            current.next = neg;
-            neg = current;
-            if(neg.next == null)
-                negLast = neg;
-        } else {
-            current.next = pos;
-            pos = current;
+    while(current != null){
+        if(current.data >= 0){
+            
+            ListNode front = current;
+            
+            while(front.next != null){
+               
+                front = front.next;
+                int n = front.data;
+                
+                if(n < 0) {
+                    int temp = current.data;
+                    current.data = front.data;
+                    front.data = temp;
+                    break;
+                }
+            }
         }
-        
-        current = next;
-    }
-    
-    if(neg == null) {
-        front = pos;
-    } else {
-        negLast.next = pos;
-        front = neg;
+        current = current.next;
     }
 }
