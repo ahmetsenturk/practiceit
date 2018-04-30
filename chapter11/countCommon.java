@@ -3,14 +3,14 @@
  * or more Sets as storage to help you solve this problem.
  */
 public int countCommon(List<Integer> list1, List<Integer> list2) {
-    HashSet<Integer> set1 = new HashSet<Integer>(list1);
-    HashSet<Integer> set2 = new HashSet<Integer>(list2);
-    int count = 0;
-
-    for(int n : set2) {
-        if(set1.contains(n))
-            count++;
-    }
-
-    return count;
+    Set<Integer> set = new TreeSet<>();
+    
+    for(int i: list1) set.add(i);
+    
+    for(int j: list2) set.add(j);
+    
+    set.retainAll(list1);
+    set.retainAll(list2);
+    
+    return set.size();
 }
